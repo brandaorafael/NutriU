@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./initial_config/mysql:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_PASSWORD=bubble
+      - MYSQL_DATABASE=NUTRIU
+    ports:
+      - 3306:3306
+  spring-boot-webapp:
+    image: openjdk:11-jre-slim
+    entrypoint: java -jar /jar/web-1.0.0-SNAPSHOT.jar
+    restart: on-failure
+    depends_on:
+      - mysql
+    ports:
+      - 8080:8080
+    volumes:
+      - ./web/build/libs/:/jar/
+
+volumes:
+  db:
