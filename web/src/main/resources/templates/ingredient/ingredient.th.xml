@@ -1,0 +1,89 @@
+<thlogic>
+
+    <attr sel="#selectSize"
+          th:onchange="'window.location.href = \'' + @{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__} + '?name=' + @{${name}} + '&amp;size=\' + this.value ' "
+          />
+    <attr sel="#formSearch"
+          th:action="@{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__}"
+          th:method="GET"
+          />
+    <attr sel="#ingredientNameInput"
+          th:value="${name}"
+          />
+    <attr sel="#hiddenSearchInput"
+          th:value="${ingredientPage.size}"
+          />
+    <attr sel="#optionSize"
+          th:each="size : ${pageSizes}"
+          th:text="${size}"
+          th:selected="${ingredientPage.getPageable().getPageSize() == size}"
+          />
+
+    <attr sel="#anchorAddIngredient"
+          th:href="@{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__/__${T(brandao.rafael.NutriU.util.Mappings).ADD_INGREDIENT}__}"
+          />
+
+    <attr sel="#ingredient"
+          th:each="ingredient, ingredientIndex : ${ingredientPage.content}"
+          />
+    <attr sel="#itemId"
+          th:text="${ingredient.id}"
+          />
+    <attr sel="#itemName"
+          th:text="${ingredient.name}"
+          />
+    <attr sel="#itemCalories"
+          th:text="${ingredient.calories}"
+          />
+    <attr sel="#itemCarbohydrates"
+          th:text="${ingredient.carbohydrates}"
+          />
+    <attr sel="#itemProteins"
+          th:text="${ingredient.proteins}"
+          />
+    <attr sel="#itemFat"
+          th:text="${ingredient.fat}"
+          />
+    <attr sel="#anchorEditIngredient"
+          th:href="@{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__/__${T(brandao.rafael.NutriU.util.Mappings).EDIT_INGREDIENT}__?id=__${ingredient.id}__}"
+          />
+    <attr sel="#deleteButton"
+          th:attr="data-object-id=''+${ingredient.id}+'', data-object-name=''+${ingredient.name}+''"
+          />
+
+    <attr sel="#dataTableInfo"
+          th:text="${pagesMessage}"
+          />
+
+    <attr sel="#buttonFirst"
+          th:classappend="${!ingredientPage.hasPrevious()} ? disabled"
+          th:href="@{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__(size=${ingredientPage.size}, page=1)}"
+          />
+    <attr sel="#buttonPrevious"
+          th:classappend="${!ingredientPage.hasPrevious()} ? disabled"
+          th:href="@{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__(size=${ingredientPage.size}, page=${ingredientPage.previousOrFirstPageable().getPageNumber() + 1})}"
+          />
+
+    <attr sel="#anchorPageNumber"
+          th:each="page : ${pages}"
+          th:text="${page}"
+          th:href="@{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__(size=${ingredientPage.size}, page=${page})}"
+          th:classappend="${page == ingredientPage.getPageable().getPageNumber() + 1} ? current"
+          />
+
+    <attr sel="#buttonNext"
+          th:classappend="${!ingredientPage.hasNext()} ? disabled"
+          th:href="@{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__(size=${ingredientPage.size}, page=${ingredientPage.nextOrLastPageable().getPageNumber() + 1})}"
+          />
+    <attr sel="#buttonLast"
+          th:classappend="${!ingredientPage.hasNext()} ? disabled"
+          th:href="@{__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__(size=${ingredientPage.size}, page=${ingredientPage.getTotalPages()})}"
+          />
+
+    <attr sel="#deleteModal"
+          />
+    <attr sel="#deleteModalBody"
+          />
+    <attr sel="#formDeleteIngredient"
+          />
+</thlogic>

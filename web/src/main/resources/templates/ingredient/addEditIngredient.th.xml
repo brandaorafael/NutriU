@@ -1,0 +1,50 @@
+<thlogic>
+
+    <attr sel="#head"
+          th:href="@{/css/bootstrap.css}"/>
+
+    <attr sel="#mainMessage"
+        th:text="${message}" />
+
+    <attr sel="#form"
+          th:action="${ingredient.id} ? @{__${T(brandao.rafael.NutriU.util.Mappings).EDIT_INGREDIENT}__?id=__${ingredient.id}__} : @{__${T(brandao.rafael.NutriU.util.Mappings).ADD_INGREDIENT}__}"
+          th:method="POST"
+          th:object="${ingredient}"/>
+
+    <attr sel="#labelName"
+          th:text="Ingredient"/>
+    <attr sel="#inputName"
+          th:placeholder="|Ingredient Name|"
+          th:field="*{name}"/>
+
+    <attr sel="#labelCalories"
+          th:text="Calories"/>
+    <attr sel="#inputCalories"
+          th:placeholder="Calories"
+          th:field="*{calories}"/>
+
+    <attr sel="#labelCarbohydrates"
+          th:text="Carbohydrates"/>
+    <attr sel="#inputCarbohydrates"
+          th:placeholder="Carbohydrates"
+          th:field="*{carbohydrates}"/>
+
+    <attr sel="#labelProteins"
+          th:text="Proteins"/>
+    <attr sel="#inputProteins"
+          th:placeholder="Proteins"
+          th:field="*{proteins}"/>
+
+    <attr sel="#labelFat"
+          th:text="Fat"/>
+    <attr sel="#inputFat"
+          th:placeholder="Fat"
+          th:field="*{fat}"/>
+
+    <attr sel="#submit"
+          th:text="${ingredient.id} ? |Save| : |Add Ingredient|"/>
+
+    <attr sel="#anchorCancel"
+          th:href="@{/__${T(brandao.rafael.NutriU.util.Mappings).INGREDIENT}__}"
+          />
+</thlogic>
